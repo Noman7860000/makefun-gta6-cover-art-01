@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Nights — GTA-style Cover Maker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ff2e88'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='900' text-anchor='middle' fill='white'%3EV%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <h1>VICE NIGHTS</h1>
+    <p class="tag">Turn a photo and a caption into a sunset-soaked poster cover. Everything stays on your machine.</p>
+
+    <fieldset>
+      <legend>Photos</legend>
+      <label>Hero photo <input id="photo-hero" type="file" accept="image/*"></label>
+      <label>Side photo <input id="photo-side" type="file" accept="image/*"></label>
+      <div class="row">
+        <button id="sample" type="button">Use sample photos</button>
+        <button id="swap" type="button">Swap photos</button>
+      </div>
+      <p class="hint">Drag on the cover to move a photo, scroll to zoom. Click a panel to select it.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Layout</legend>
+      <div class="row" role="group" aria-label="Panel layout">
+        <button class="layout-btn is-active" type="button" data-layout="split3">Hero + 2</button>
+        <button class="layout-btn" type="button" data-layout="split2">Hero + 1</button>
+        <button class="layout-btn" type="button" data-layout="hero">Hero only</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Colour grade</legend>
+      <div class="row" role="group" aria-label="Colour grade">
+        <button class="grade-btn is-active" type="button" data-grade="sunset">Sunset</button>
+        <button class="grade-btn" type="button" data-grade="neon">Neon</button>
+        <button class="grade-btn" type="button" data-grade="golden">Golden</button>
+        <button class="grade-btn" type="button" data-grade="noir">Noir</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Selected panel</legend>
+      <label>Zoom <input id="zoom" type="range" min="1" max="2.5" step="0.01" value="1"></label>
+      <label>Move left / right <input id="offx" type="range" min="-200" max="200" step="1" value="0"></label>
+      <label>Move up / down <input id="offy" type="range" min="-200" max="200" step="1" value="0"></label>
+      <button id="reset-crop" type="button">Reset this panel</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Caption</legend>
+      <label>Text <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
+      <label>Size <input id="cap-size" type="range" min="40" max="160" step="1" value="104"></label>
+      <div class="row" role="group" aria-label="Caption colour">
+        <button class="swatch is-active" type="button" data-color="#ffffff" style="background:#ffffff" aria-label="White"></button>
+        <button class="swatch" type="button" data-color="#ffd400" style="background:#ffd400" aria-label="Yellow"></button>
+        <button class="swatch" type="button" data-color="#ff2e88" style="background:#ff2e88" aria-label="Pink"></button>
+        <button class="swatch" type="button" data-color="#00e5ff" style="background:#00e5ff" aria-label="Cyan"></button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Export</legend>
+      <label>Size
+        <select id="export-size">
+          <option value="1080x1080" selected>Square 1080 × 1080</option>
+          <option value="1080x1350">Portrait 1080 × 1350</option>
+          <option value="1920x1080">Wide 1920 × 1080</option>
+        </select>
+      </label>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <p id="status" role="status"></p>
+    </fieldset>
+  </section>
+  <section class="stage">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+    <p class="stage-hint" id="panel-hint">Selected panel: hero</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
